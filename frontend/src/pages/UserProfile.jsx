@@ -60,7 +60,7 @@
         toast.success("Profile updated successfully", {
           style: { background: "#fff", color: "#000" },
         });
-      } catch (error) {
+      } catch {
         toast.error("Could not update profile");
       } finally {
         setLoading(false);

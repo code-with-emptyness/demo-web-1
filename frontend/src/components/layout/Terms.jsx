@@ -37,13 +37,13 @@ const Terms = () => {
       icon: Copyright,
       title: "Intellectual Property",
       summary: "Ownership",
-      content: "All content included on this site (text, graphics, logos, images) is the property of TShirtStore and is protected by international copyright laws."
+      content: "All content included on this site (text, graphics, logos, images) is the property of Demo Store and is protected by international copyright laws."
     },
     {
       icon: AlertCircle,
       title: "Limitation of Liability",
       summary: "Disclaimer",
-      content: "TShirtStore shall not be liable for any indirect, incidental, or punitive damages arising from your use of our service or products procured using the service."
+      content: "Demo Store shall not be liable for any indirect, incidental, or punitive damages arising from your use of our service or products procured using the service."
     },
     {
       icon: Gavel,
@@ -98,7 +98,7 @@ const Terms = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-              Please read these terms carefully. They govern your use of the TShirtStore website and our services.
+              Please read these terms carefully. They govern your use of the Demo Store website and our services.
             </p>
           </motion.div>
         </div>
@@ -115,7 +115,7 @@ const Terms = () => {
           >
             <ShieldCheck className="w-10 h-10 text-zinc-300 flex-shrink-0" />
             <p className="text-zinc-300 text-lg leading-relaxed text-left">
-              These terms constitute a legally binding agreement between you and TShirtStore. By accessing the site, you acknowledge that you have read, understood, and agree to be bound by these terms.
+              These terms constitute a legally binding agreement between you and Demo Store. By accessing the site, you acknowledge that you have read, understood, and agree to be bound by these terms.
             </p>
           </motion.div>
         </div>

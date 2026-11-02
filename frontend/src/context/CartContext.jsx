@@ -98,7 +98,7 @@ export const CartProvider = ({ children }) => {
     });
     dispatch({ type: 'SET_CART', payload: response.data });
     toast.success('Added to cart!');
-  } catch (error) {
+  } catch {
     toast.error('Failed to add to cart');
   }
 };
@@ -118,7 +118,7 @@ const updateCartItem = async (productId, quantity, size) => {
   try {
     const response = await api.put(`/api/cart/${productId}`, { quantity, size });
     dispatch({ type: 'SET_CART', payload: response.data });
-  } catch (error) {
+  } catch {
     toast.error('Failed to update cart');
   }
 };
@@ -139,7 +139,7 @@ const removeFromCart = async (productId, size) => {
     const response = await api.delete(`/api/cart/${productId}`, { data: { size } });
     dispatch({ type: 'SET_CART', payload: response.data });
     toast.success('Removed from cart');
-  } catch (error) {
+  } catch {
     toast.error('Failed to remove from cart');
   }
 };
@@ -149,7 +149,7 @@ const clearCart = async () => {
   if (token) {
     try {
       await api.delete('/api/cart'); // This clears cart on server
-    } catch (error) {
+    } catch {
       toast.error('Failed to clear cart');
       return;
     }

@@ -5,13 +5,19 @@ const Product = require('../models/Product');
 
 const router = express.Router();
 
+const getProductId = (p) => {
+  if (!p) return null;
+  return p._id ? p._id.toString() : p.toString();
+};
+
 // Get user cart (User access)
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).populate('cart.product');
-    res.json(user.cart);
+    if (!user) return res.status(404).json({ msg: 'User not found' });
+    res.json(user.cart || []);
   } catch (error) {
-    console.error('Get cart error:', error);
+    console.error('Get cart error:', error.message);
     res.status(500).json({ msg: 'Server error' });
   }
 });
@@ -19,7 +25,7 @@ router.get('/', auth, async (req, res) => {
 // Add to cart (User access)
 router.post('/', auth, async (req, res) => {
   try {
-    const { productId, quantity, size} = req.body;
+    const { productId, quantity = 1, size } = req.body;
     if (!size) return res.status(400).json({ msg: 'Size is required' });
 
     const product = await Product.findById(productId);
@@ -28,20 +34,19 @@ router.post('/', auth, async (req, res) => {
     }
 
     const user = await User.findById(req.user.id);
-    
+    if (!user) return res.status(404).json({ msg: 'User not found' });
+
     // Check if product already in cart
     const existingItemIndex = user.cart.findIndex(
-      item => item.product.toString() === productId && item.size === size
+      item => getProductId(item.product) === productId && item.size === size
     );
 
     if (existingItemIndex > -1) {
-      // Update quantity if product exists
-      user.cart[existingItemIndex].quantity += quantity;
+      user.cart[existingItemIndex].quantity += Number(quantity);
     } else {
-      // Add new item to cart
       user.cart.push({
         product: productId,
-        quantity,
+        quantity: Number(quantity),
         size
       });
     }
@@ -51,7 +56,7 @@ router.post('/', auth, async (req, res) => {
     
     res.json(user.cart);
   } catch (error) {
-    console.error('Add to cart error:', error);
+    console.error('Add to cart error:', error.message);
     res.status(500).json({ msg: 'Server error' });
   }
 });
@@ -62,21 +67,23 @@ router.put('/:productId', auth, async (req, res) => {
     const { quantity, size } = req.body;
     
     const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ msg: 'User not found' });
+
     const itemIndex = user.cart.findIndex(
-      item => item.product.toString() === req.params.productId  && item.size === size
+      item => getProductId(item.product) === req.params.productId && item.size === size
     );
 
     if (itemIndex === -1) {
       return res.status(404).json({ msg: 'Item not found in cart' });
     }
 
-    user.cart[itemIndex].quantity = quantity;
+    user.cart[itemIndex].quantity = Number(quantity);
     await user.save();
     await user.populate('cart.product');
     
     res.json(user.cart);
   } catch (error) {
-    console.error('Update cart error:', error);
+    console.error('Update cart error:', error.message);
     res.status(500).json({ msg: 'Server error' });
   }
 });
@@ -84,12 +91,14 @@ router.put('/:productId', auth, async (req, res) => {
 // Remove from cart (User access)
 router.delete('/:productId', auth, async (req, res) => {
   try {
-    const { size } = req.body; // get size from request body
+    const { size } = req.body;
     if (!size) return res.status(400).json({ msg: 'Size is required to remove item' });
     
     const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ msg: 'User not found' });
+
     user.cart = user.cart.filter(
-      item => !(item.product.toString() === req.params.productId && item.size === size)
+      item => !(getProductId(item.product) === req.params.productId && item.size === size)
     );
     
     await user.save();
@@ -97,7 +106,7 @@ router.delete('/:productId', auth, async (req, res) => {
     
     res.json(user.cart);
   } catch (error) {
-    console.error('Remove from cart error:', error);
+    console.error('Remove from cart error:', error.message);
     res.status(500).json({ msg: 'Server error' });
   }
 });
@@ -106,12 +115,14 @@ router.delete('/:productId', auth, async (req, res) => {
 router.delete('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ msg: 'User not found' });
+
     user.cart = [];
     await user.save();
     
     res.json({ msg: 'Cart cleared successfully' });
   } catch (error) {
-    console.error('Clear cart error:', error);
+    console.error('Clear cart error:', error.message);
     res.status(500).json({ msg: 'Server error' });
   }
 });

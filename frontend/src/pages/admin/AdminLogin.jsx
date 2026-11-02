@@ -9,7 +9,6 @@ import {
   Cpu
 } from 'lucide-react';
 import Lightning from '../auth/Lightning';
-import api from '../../config/axios';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 
@@ -35,7 +34,6 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await api.post('/api/admin/auth/login', formData);
       await login(formData.email, formData.password, true);
       navigate('/admin/dashboard');
     } catch (error) {

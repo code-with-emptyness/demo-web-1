@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   GridIcon, 
@@ -38,20 +38,14 @@ const Products = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    fetchProducts();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentPage, filters]); // Trigger fetch on page/filter change
-
-  // Debounced search effect could be added here, currently triggers on submit
-  
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       const params = {
         page: currentPage,
         limit: 12,
         category: filters.category,
+        priceRange: filters.priceRange,
         sort: filters.sort,
         search: searchQuery
       };
@@ -65,7 +59,12 @@ const Products = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, filters, searchQuery]);
+
+  useEffect(() => {
+    fetchProducts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [fetchProducts]); // Trigger fetch on page/filter change
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);

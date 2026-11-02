@@ -81,7 +81,7 @@ const About = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">The Origin Story</h2>
               <div className="space-y-6 text-zinc-400 leading-relaxed">
                 <p>
-                  <span className="text-white font-bold">TShirtStore</span> wasn't built in a boardroom. It started in a garage with a single screen printing press and an obsession with finding the perfect weight of cotton.
+                  <span className="text-white font-bold">Demo Store</span> wasn't built in a boardroom. It started in a garage with a single screen printing press and an obsession with finding the perfect weight of cotton.
                 </p>
                 <p>
                   We were tired of "disposable fashion"—shirts that lost their shape after one wash. We wanted to create the essential tee: heavy enough to drape perfectly, soft enough to live in, and durable enough to last years.
@@ -173,7 +173,7 @@ const About = () => {
             READY TO UPGRADE YOUR FIT?
           </h2>
           <p className="text-zinc-400 text-lg mb-10 max-w-xl mx-auto">
-            Join thousands of others who have switched to the TShirtStore standard. Experience the difference today.
+            Join thousands of others who have switched to the Demo Store standard. Experience the difference today.
           </p>
           <Link
             to="/products"

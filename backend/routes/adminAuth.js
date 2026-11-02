@@ -63,10 +63,10 @@ router.post('/login', [
 // Create sample admin user (one-time setup route)
 router.post('/setup-admin', async (req, res) => {
   try {
-    // Check if admin already exists
-    const existingAdmin = await User.findOne({ email: 'admin@gmail.com' });
+    // Check if an admin already exists
+    const existingAdmin = await User.findOne({ role: 'admin' });
     if (existingAdmin) {
-      return res.status(400).json({ msg: 'Admin user already exists' });
+      return res.status(400).json({ msg: 'Admin user already exists in the system' });
     }
 
     // Create admin user

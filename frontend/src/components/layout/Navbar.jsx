@@ -87,13 +87,13 @@ const Navbar = () => {
               <Link to="/" className="group flex items-center gap-3">
                 {/* Visual Mark */}
                 <div className="w-10 h-10 bg-white flex items-center justify-center group-hover:rotate-180 transition-transform duration-500 ease-out">
-                  <span className="font-black text-black text-xl leading-none">T</span>
+                  <span className="font-black text-black text-xl leading-none">D</span>
                 </div>
                 
                 {/* Text Mark */}
                 <div className="flex flex-col items-start">
                   <h1 className="text-xl font-black tracking-tighter text-white leading-none">
-                    TSHIRT<span className="text-zinc-600">STORE</span>
+                    DEMO<span className="text-zinc-600">STORE</span>
                   </h1>
                   <span className="text-[8px] font-mono text-zinc-500 tracking-[0.2em] uppercase hidden sm:block">
                     Est. 2025

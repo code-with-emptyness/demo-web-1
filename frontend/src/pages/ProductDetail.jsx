@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -26,19 +26,7 @@ const ProductDetail = () => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchProduct();
-    fetchRelatedProducts();
-  }, [id]);
-
-  useEffect(() => {
-    if (product && product.sizes && product.sizes.length > 0) {
-      setSize(product.sizes[0]);
-    }
-  }, [product]);
-
-  const fetchProduct = async () => {
+  const fetchProduct = useCallback(async () => {
     try {
       setLoading(true);
       const response = await api.get(`/api/products/${id}`);
@@ -48,16 +36,28 @@ const ProductDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
-  const fetchRelatedProducts = async () => {
+  const fetchRelatedProducts = useCallback(async () => {
     try {
       const response = await api.get(`/api/products?limit=4`);
       setRelatedProducts(response.data.products);
     } catch (error) {
       console.error("Error fetching related products:", error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchProduct();
+    fetchRelatedProducts();
+  }, [fetchProduct, fetchRelatedProducts]);
+
+  useEffect(() => {
+    if (product && product.sizes && product.sizes.length > 0) {
+      setSize(product.sizes[0]);
+    }
+  }, [product]);
 
   const handleAddToCart = () => {
     addToCart(product, quantity, size);

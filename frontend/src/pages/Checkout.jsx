@@ -13,9 +13,10 @@ import {
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import api from '../config/axios';
+import { toast } from 'react-hot-toast';
 
 const Checkout = () => {
-  const { items, getCartTotal, clearCart } = useCart();
+  const { items, clearCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -88,6 +89,7 @@ const Checkout = () => {
       navigate('/orders?success=true');
     } catch (error) {
       console.error('Checkout error:', error);
+      toast.error(error.response?.data?.msg || 'Checkout failed. Please try again.');
     } finally {
       setLoading(false);
     }

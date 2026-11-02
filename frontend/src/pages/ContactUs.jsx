@@ -82,7 +82,7 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-white">Headquarters</h3>
-                    <p className="text-zinc-500 text-sm mt-1">TShirtStore HQ, Pune, Maharashtra, India</p>
+                    <p className="text-zinc-500 text-sm mt-1">Demo Store HQ, Pune, Maharashtra, India</p>
                   </div>
                 </div>
 
@@ -102,7 +102,7 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-white">Email</h3>
-                    <p className="text-zinc-500 text-sm mt-1">sahiljadhav1617@gmail.com</p>
+                    <p className="text-zinc-500 text-sm mt-1">pratap.vijay.singh.in@gmail.com</p>
                   </div>
                 </div>
               </div>
@@ -145,7 +145,7 @@ const ContactUs = () => {
                   value={formData.name}
                   onChange={handleChange}
                   className={inputClasses}
-                  placeholder="Sahil Jadhav"
+                  placeholder="Vijay Pratap singh"
                 />
               </div>
 
@@ -159,7 +159,7 @@ const ContactUs = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className={inputClasses}
-                  placeholder="sahiljadhav@example.com"
+                  placeholder="vijaypratapsingh@example.com"
                 />
               </div>
 

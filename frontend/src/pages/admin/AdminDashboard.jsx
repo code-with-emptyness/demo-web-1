@@ -54,7 +54,7 @@ const AdminDashboard = () => {
       setStats(statsRes.data.stats);
       setProducts(productsRes.data.products);
       setOrders(ordersRes.data.orders);
-    } catch (error) {
+    } catch {
       toast.error('Failed to fetch dashboard data');
     } finally {
       setLoading(false);
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
         colors: ['Black', 'White', 'Blue', 'Red']
       });
       fetchDashboardData();
-    } catch (error) {
+    } catch {
       toast.error('Operation failed');
     }
   };
@@ -111,7 +111,7 @@ const AdminDashboard = () => {
       await api.delete(`/api/products/${productId}`);
       toast.success('Entry removed');
       fetchDashboardData();
-    } catch (error) {
+    } catch {
       toast.error('Delete failed');
     }
   };

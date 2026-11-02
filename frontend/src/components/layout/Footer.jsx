@@ -42,7 +42,7 @@ const Footer = () => {
             <div>
               <div className="mb-8">
                 <div className="w-12 h-12 bg-white flex items-center justify-center mb-6">
-                  <span className="font-black text-black text-2xl leading-none">T</span>
+                  <span className="font-black text-black text-2xl leading-none">D</span>
                 </div>
                 <h2 className="text-4xl font-black tracking-tighter uppercase leading-[0.9]">
                   Redefine<br/>The Standard.
@@ -140,7 +140,7 @@ const Footer = () => {
 
             <div className="mt-auto pt-12">
               <p className="font-mono text-[10px] text-zinc-600 uppercase">
-                Dev by Sahil Jadhav <br/>
+                Dev by Vijay Pratap singh <br/>
                 Pune, MH — IN
               </p>
             </div>
@@ -153,7 +153,7 @@ const Footer = () => {
       <div className="border-t border-white/10 overflow-hidden">
         <div className="max-w-[1800px] mx-auto px-4">
           <h1 className="text-[12vw] sm:text-[13.5vw] leading-[0.8] font-black tracking-tighter text-zinc-900 select-none text-center pointer-events-none">
-            TSHIRTSTORE®
+            DEMOSTORE®
           </h1>
         </div>
       </div>
@@ -162,7 +162,7 @@ const Footer = () => {
       <div className="bg-white text-black py-2">
         <div className="max-w-[1800px] mx-auto px-4 sm:px-8 flex flex-col md:flex-row justify-between items-center gap-2 text-[10px] font-mono uppercase font-bold tracking-widest">
           <p>© {currentYear} Inc. All Rights Reserved.</p>
-          <p>Developer: Sahil Jadhav</p>
+          <p>Developer: Vijay Pratap singh</p>
           <div className="flex gap-6">
             <Link to="/privacy" onClick={() => { if (typeof window !== 'undefined') window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); }} className="hover:underline">Privacy</Link>
             <Link to="/terms" onClick={() => { if (typeof window !== 'undefined') window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); }} className="hover:underline">Terms</Link>

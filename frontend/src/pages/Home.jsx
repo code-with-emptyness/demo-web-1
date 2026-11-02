@@ -1,12 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { 
   motion, 
   useScroll, 
-  useTransform, 
-  useSpring,
-  useMotionValue, 
-  useMotionTemplate 
+  useTransform 
 } from "framer-motion";
 import {
   ArrowRightIcon,
@@ -60,7 +57,6 @@ const Marquee = ({ text, reverse = false }) => {
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const containerRef = useRef(null);
   
   const { scrollY } = useScroll();
   const yParallax = useTransform(scrollY, [0, 1000], [0, 300]);

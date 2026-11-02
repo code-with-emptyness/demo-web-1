@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Clock, Calendar, BookOpen, Send } from "lucide-react";
 
@@ -51,8 +51,6 @@ const samplePosts = [
 ];
 
 const Journal = () => {
-  const [hoveredPost, setHoveredPost] = useState(null);
-
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black overflow-hidden font-sans">
       
@@ -107,8 +105,6 @@ const Journal = () => {
                 key={post.id} 
                 variants={itemVariants} 
                 className="group cursor-pointer"
-                onMouseEnter={() => setHoveredPost(post.id)}
-                onMouseLeave={() => setHoveredPost(null)}
               >
                 {/* Image Container */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md mb-8 bg-zinc-900">

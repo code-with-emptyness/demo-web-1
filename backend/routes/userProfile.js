@@ -15,19 +15,20 @@ router.post('/profile', auth, async (req, res) => {
     }
 
     // Update user fields
-    user.name = name || user.name;
-    user.email = email || user.email;
-    user.phone = phone || user.phone;
-    user.address = address || user.address;
-    user.city = city || user.city;
-    user.state = state || user.state;
-    user.zipCode = zipCode || user.zipCode;
+    user.name = name !== undefined ? name : user.name;
+    user.email = email !== undefined ? email : user.email;
+    user.phone = phone !== undefined ? phone : user.phone;
+    user.address = address !== undefined ? address : user.address;
+    user.city = city !== undefined ? city : user.city;
+    user.state = state !== undefined ? state : user.state;
+    user.zipCode = zipCode !== undefined ? zipCode : user.zipCode;
 
     await user.save();
-    res.json(user);
+    const updatedUser = await User.findById(req.user.id).select('-password');
+    res.json(updatedUser);
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server error');
+    console.error('Update profile error:', error.message);
+    res.status(500).json({ msg: 'Server error updating profile' });
   }
 });
 
@@ -39,10 +40,9 @@ router.get('/profile', auth, async (req, res) => {
 
     res.json(user);
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
+    console.error('Get profile error:', error.message);
+    res.status(500).json({ msg: 'Server error fetching profile' });
   }
 });
-
 
 module.exports = router;
